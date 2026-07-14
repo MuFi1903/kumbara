@@ -9,7 +9,7 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  bool _isAvatarSelected = false; // Avatar değişti mi kontrolü
+  bool _isAvatarSelected = false; // Avatar değişti mi kontrolü[cite: 5]
 
   @override
   Widget build(BuildContext context) {
@@ -18,29 +18,35 @@ class _ProfileViewState extends State<ProfileView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // 1. KULLANICI KARTVİZİTİ (TAŞMA HATASI GİDERİLDİ)
+          // 1. KULLANICI KARTVİZİTİ
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [AppColors.inputBackground, Color(0xff172a45)],
+                colors: [AppColors.darkNavy, AppColors.sweetPurple],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.gold.withAlpha(50)),
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.darkNavy.withValues(alpha: 0.2),
+                  blurRadius: 15,
+                  offset: const Offset(0, 8),
+                ),
+              ],
             ),
             child: Row(
               children: [
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      _isAvatarSelected = true;
+                      _isAvatarSelected = true; //[cite: 5]
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
-                          'Galeri Açıldı: Profil fotoğrafınız başarıyla güncellendi!',
+                          'Galeri Açıldı: Profil fotoğrafınız başarıyla güncellendi!', //[cite: 5]
                         ),
                       ),
                     );
@@ -48,13 +54,13 @@ class _ProfileViewState extends State<ProfileView> {
                   child: Stack(
                     children: [
                       CircleAvatar(
-                        backgroundColor: AppColors.gold,
+                        backgroundColor: AppColors.goldYellow,
                         radius: 32,
                         child: Icon(
                           _isAvatarSelected
                               ? Icons.face_rounded
-                              : Icons.person_rounded,
-                          color: AppColors.background,
+                              : Icons.person_rounded, //[cite: 5]
+                          color: Colors.white,
                           size: 36,
                         ),
                       ),
@@ -64,12 +70,12 @@ class _ProfileViewState extends State<ProfileView> {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: const BoxDecoration(
-                            color: AppColors.neonBlue,
+                            color: AppColors.mintTurquoise,
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
                             Icons.camera_alt_rounded,
-                            color: AppColors.background,
+                            color: Colors.white,
                             size: 12,
                           ),
                         ),
@@ -78,13 +84,12 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                // Expanded ekleyerek uzun yazıların ekrandan taşmasını engelledik
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Mustafa Fildiş',
+                        'Mustafa Fildiş', //[cite: 5]
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -96,11 +101,11 @@ class _ProfileViewState extends State<ProfileView> {
                       Text(
                         _isAvatarSelected
                             ? 'Profil Resmi: mustafa_avatar.png'
-                            : 'Premium Kumbara Üyesi',
+                            : 'Premium Kumbara Üyesi', //[cite: 5]
                         style: const TextStyle(
-                          color: AppColors.neonBlue,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
+                          color: AppColors.mintTurquoise,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -116,15 +121,15 @@ class _ProfileViewState extends State<ProfileView> {
           Row(
             children: [
               _buildMetricCard(
-                'Toplam Kazanç',
-                '450 TL',
-                Icons.account_balance_wallet_rounded,
+                'Toplam Kazanç', //[cite: 5]
+                '450 TL', //[cite: 5]
+                Icons.account_balance_wallet_rounded, //[cite: 5]
               ),
               const SizedBox(width: 16),
               _buildMetricCard(
-                'Harcanan Puan',
-                '264 TL',
-                Icons.shopping_bag_rounded,
+                'Harcanan Puan', //[cite: 5]
+                '264 TL', //[cite: 5]
+                Icons.shopping_bag_rounded, //[cite: 5]
               ),
             ],
           ),
@@ -132,40 +137,57 @@ class _ProfileViewState extends State<ProfileView> {
 
           // 3. MENÜ SEÇENEKLERİ LİSTESİ
           const Text(
-            'HESAP AYARLARI',
+            'HESAP AYARLARI', //[cite: 5]
             style: TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
+              color: AppColors.darkNavy,
+              fontSize: 13,
               fontWeight: FontWeight.bold,
               letterSpacing: 1,
             ),
           ),
           const SizedBox(height: 10),
-          _buildMenuTile('Dijital Kumbara Kartım', Icons.credit_card_rounded),
-          _buildMenuTile('Geçmiş İşlemlerim', Icons.history_toggle_off_rounded),
-          _buildMenuTile('Kayıtlı Ödeme Yöntemleri', Icons.payment_rounded),
-          _buildMenuTile('Güvenlik ve Şifre', Icons.shield_rounded),
+          _buildMenuTile(
+            'Dijital Kumbara Kartım',
+            Icons.credit_card_rounded,
+          ), //[cite: 5]
+          _buildMenuTile(
+            'Geçmiş İşlemlerim',
+            Icons.history_toggle_off_rounded,
+          ), //[cite: 5]
+          _buildMenuTile(
+            'Kayıtlı Ödeme Yöntemleri',
+            Icons.payment_rounded,
+          ), //[cite: 5]
+          _buildMenuTile('Güvenlik ve Şifre', Icons.shield_rounded), //[cite: 5]
 
           const SizedBox(height: 24),
           const Text(
-            'DESTEK & SÖZLEŞMELER',
+            'DESTEK & SÖZLEŞMELER', //[cite: 5]
             style: TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
+              color: AppColors.darkNavy,
+              fontSize: 13,
               fontWeight: FontWeight.bold,
               letterSpacing: 1,
             ),
           ),
           const SizedBox(height: 10),
-          _buildMenuTile('Yardım Merkezi / SSS', Icons.help_outline_rounded),
-          _buildMenuTile('Kullanım Koşulları', Icons.description_outlined),
+          _buildMenuTile(
+            'Yardım Merkezi / SSS',
+            Icons.help_outline_rounded,
+          ), //[cite: 5]
+          _buildMenuTile(
+            'Kullanım Koşulları',
+            Icons.description_outlined,
+          ), //[cite: 5]
 
           const SizedBox(height: 40),
 
           // 4. ÇIKIŞ YAP BUTONU
           OutlinedButton.icon(
             onPressed: () {
-              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.of(
+                context,
+              ).popUntil((route) => route.isFirst); //[cite: 5]
             },
             icon: const Icon(
               Icons.logout_rounded,
@@ -173,26 +195,32 @@ class _ProfileViewState extends State<ProfileView> {
               size: 18,
             ),
             label: const Text(
-              'Hesaptan Çıkış Yap',
+              'Hesaptan Çıkış Yap', //[cite: 5]
               style: TextStyle(
                 color: Colors.redAccent,
                 fontWeight: FontWeight.bold,
+                fontSize: 15,
               ),
             ),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
-              side: const BorderSide(color: Colors.redAccent, width: 1),
+              side: const BorderSide(color: Colors.redAccent, width: 1.5),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
               ),
             ),
           ),
           const SizedBox(height: 30),
 
           const Text(
-            'Kumbara v1.0.0 Stable\nPowered by Ahenk Bilgisayar Yazılım',
+            'Kumbara v1.0.0 Stable\nPowered by Ahenk Bilgisayar Yazılım', //[cite: 5]
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white24, fontSize: 11, height: 1.5),
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 12,
+              height: 1.5,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
@@ -204,26 +232,38 @@ class _ProfileViewState extends State<ProfileView> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.inputBackground,
-          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.grey.shade200, width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade100,
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: AppColors.gold, size: 20),
+            Icon(icon, color: AppColors.warmOrange, size: 24),
             const SizedBox(height: 12),
             Text(
               value,
               style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+                color: AppColors.darkNavy,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               title,
-              style: const TextStyle(color: Colors.grey, fontSize: 12),
+              style: TextStyle(
+                color: Colors.grey.shade600,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),
@@ -235,22 +275,23 @@ class _ProfileViewState extends State<ProfileView> {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: AppColors.inputBackground,
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade200, width: 1.5),
       ),
       child: ListTile(
-        leading: Icon(icon, color: AppColors.neonBlue, size: 20),
+        leading: Icon(icon, color: AppColors.warmOrange, size: 22),
         title: Text(
           title,
           style: const TextStyle(
-            color: Colors.white,
+            color: AppColors.darkNavy,
             fontSize: 14,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        trailing: const Icon(
+        trailing: Icon(
           Icons.arrow_forward_ios_rounded,
-          color: Colors.white24,
+          color: Colors.grey.shade400,
           size: 12,
         ),
         onTap: () {},

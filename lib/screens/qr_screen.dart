@@ -9,48 +9,55 @@ class QrScreen extends StatefulWidget {
 }
 
 class _QrScreenState extends State<QrScreen> {
-  bool _isDigitalCardMode = false;
+  bool _isDigitalCardMode = false; //[cite: 6]
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background, //[cite: 6]
       body: SafeArea(
-        // Center yerine Column'ı doğrudan en üste dayıyoruz (MainAxisAlignment.start)
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24.0,
+            vertical: 20.0,
+          ), //[cite: 6]
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start, // Üst eksene kilitlendi
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start, //[cite: 6]
+            crossAxisAlignment: CrossAxisAlignment.stretch, //[cite: 6]
             children: [
-              const SizedBox(height: 10), // En üstten güvenli bir boşluk
-              // ÜST SEKME BUTONLARI (Artık yeri milimetrik olarak sabit)
+              const SizedBox(height: 10), //[cite: 6]
+              // ÜST SEKME BUTONLARI
               Container(
-                padding: const EdgeInsets.all(4),
+                padding: const EdgeInsets.all(4), //[cite: 6]
                 decoration: BoxDecoration(
-                  color: AppColors.inputBackground,
-                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.grey.shade300, width: 1),
                 ),
                 child: Row(
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => setState(() => _isDigitalCardMode = false),
+                        onTap: () => setState(
+                          () => _isDigitalCardMode = false,
+                        ), //[cite: 6]
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                          ), //[cite: 6]
                           decoration: BoxDecoration(
                             color: !_isDigitalCardMode
-                                ? AppColors.gold
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(10),
+                                ? AppColors.warmOrange
+                                : Colors.transparent, //[cite: 6]
+                            borderRadius: BorderRadius.circular(12), //[cite: 6]
                           ),
                           child: Text(
-                            'Karekod (QR)',
-                            textAlign: TextAlign.center,
+                            'Karekod (QR)', //[cite: 6]
+                            textAlign: TextAlign.center, //[cite: 6]
                             style: TextStyle(
                               color: !_isDigitalCardMode
-                                  ? AppColors.background
-                                  : Colors.white,
+                                  ? Colors.white
+                                  : AppColors.darkNavy,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -59,22 +66,26 @@ class _QrScreenState extends State<QrScreen> {
                     ),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => setState(() => _isDigitalCardMode = true),
+                        onTap: () => setState(
+                          () => _isDigitalCardMode = true,
+                        ), //[cite: 6]
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                          ), //[cite: 6]
                           decoration: BoxDecoration(
                             color: _isDigitalCardMode
-                                ? AppColors.gold
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(10),
+                                ? AppColors.warmOrange
+                                : Colors.transparent, //[cite: 6]
+                            borderRadius: BorderRadius.circular(12), //[cite: 6]
                           ),
                           child: Text(
-                            'Dijital Kart',
-                            textAlign: TextAlign.center,
+                            'Dijital Kart', //[cite: 6]
+                            textAlign: TextAlign.center, //[cite: 6]
                             style: TextStyle(
                               color: _isDigitalCardMode
-                                  ? AppColors.background
-                                  : Colors.white,
+                                  ? Colors.white
+                                  : AppColors.darkNavy,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -85,30 +96,27 @@ class _QrScreenState extends State<QrScreen> {
                 ),
               ),
 
-              const SizedBox(
-                height: 40,
-              ), // Butonlar ile Kart arasındaki mesafe ASLA değişmeyecek
-              // DİNAMİK KART ALANI (İki kartın boyutu ve dış kalıbı %100 eşitlendi)
+              const SizedBox(height: 40), //[cite: 6]
+              // DİNAMİK KART ALANI
               SizedBox(
-                height: 340, // Sabit dikey kalıp yüksekliği
+                height: 340, //[cite: 6]
                 child: !_isDigitalCardMode
                     ? _buildQrView()
-                    : _buildDigitalCardView(),
+                    : _buildDigitalCardView(), //[cite: 6]
               ),
 
-              const SizedBox(
-                height: 40,
-              ), // Kart ile alt metin arasındaki mesafe ASLA değişmeyecek
+              const SizedBox(height: 40), //[cite: 6]
               // BİLGİLENDİRME METNİ
               Text(
                 !_isDigitalCardMode
                     ? 'Kasadaki görevliye bu karekodu okutarak\nKumbara puanlarınızı anında işleyebilirsiniz.'
-                    : 'Karekod okunmadıysa bu kartı göstererek\nveya numarayı söyleyerek işlem yapabilirsiniz.',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.grey,
+                    : 'Karekod okunmadıysa bu kartı göstererek\nveya numarayı söyleyerek işlem yapabilirsiniz.', //[cite: 6]
+                textAlign: TextAlign.center, //[cite: 6]
+                style: TextStyle(
+                  color: Colors.grey.shade600,
                   fontSize: 13,
-                  height: 1.5,
+                  fontWeight: FontWeight.w500,
+                  height: 1.5, //[cite: 6]
                 ),
               ),
             ],
@@ -121,55 +129,67 @@ class _QrScreenState extends State<QrScreen> {
   // 1. KART: QR KOD GÖRÜNÜMÜ
   Widget _buildQrView() {
     return Container(
-      width: double.infinity,
-      height: 340,
-      padding: const EdgeInsets.all(24),
+      width: double.infinity, //[cite: 6]
+      height: 340, //[cite: 6]
+      padding: const EdgeInsets.all(24), //[cite: 6]
       decoration: BoxDecoration(
-        color: AppColors.inputBackground,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.gold.withAlpha(50), width: 1),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24), //[cite: 6]
+        border: Border.all(
+          color: AppColors.warmOrange.withValues(alpha: 0.3),
+          width: 1.5,
+        ),
         boxShadow: [
-          BoxShadow(color: AppColors.gold.withAlpha(15), blurRadius: 20),
+          BoxShadow(
+            color: Colors.grey.shade100,
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center, //[cite: 6]
         children: [
           const Text(
-            'KUMBARA KODUNUZ',
+            'KUMBARA KODUNUZ', //[cite: 6]
             style: TextStyle(
-              color: AppColors.gold,
+              color: AppColors.warmOrange,
               fontWeight: FontWeight.bold,
-              letterSpacing: 2,
+              letterSpacing: 2, //[cite: 6]
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 20), //[cite: 6]
           Container(
-            width: 170,
-            height: 170,
-            padding: const EdgeInsets.all(12),
+            width: 170, //[cite: 6]
+            height: 170, //[cite: 6]
+            padding: const EdgeInsets.all(12), //[cite: 6]
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
+              color: Colors.white, //[cite: 6]
+              borderRadius: BorderRadius.circular(16), //[cite: 6]
+              border: Border.all(color: Colors.grey.shade200, width: 1),
             ),
             child: const Icon(
-              Icons.qr_code_2_rounded,
-              size: 146,
-              color: AppColors.background,
+              Icons.qr_code_2_rounded, //[cite: 6]
+              size: 146, //[cite: 6]
+              color: AppColors.darkNavy,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 20), //[cite: 6]
           const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center, //[cite: 6]
             children: [
-              Icon(Icons.refresh_rounded, color: AppColors.neonBlue, size: 16),
-              SizedBox(width: 6),
+              Icon(
+                Icons.refresh_rounded,
+                color: AppColors.darkNavy,
+                size: 16,
+              ), //[cite: 6]
+              SizedBox(width: 6), //[cite: 6]
               Text(
-                '60 saniye içinde yenilenecek',
+                '60 saniye içinde yenilenecek', //[cite: 6]
                 style: TextStyle(
-                  color: AppColors.neonBlue,
+                  color: AppColors.darkNavy,
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
@@ -182,91 +202,106 @@ class _QrScreenState extends State<QrScreen> {
   // 2. KART: DİJİTAL KART GÖRÜNÜMÜ
   Widget _buildDigitalCardView() {
     return Container(
-      width: double.infinity,
-      height: 340,
-      padding: const EdgeInsets.all(24),
+      width: double.infinity, //[cite: 6]
+      height: 340, //[cite: 6]
+      padding: const EdgeInsets.all(24), //[cite: 6]
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xff112240), Color(0xff1a365d)],
+          colors: [AppColors.darkNavy, AppColors.sweetPurple],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.neonBlue.withAlpha(50), width: 1),
+        borderRadius: BorderRadius.circular(24), //[cite: 6]
         boxShadow: [
-          BoxShadow(color: AppColors.neonBlue.withAlpha(15), blurRadius: 20),
+          BoxShadow(
+            color: AppColors.darkNavy.withValues(alpha: 0.3),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start, //[cite: 6]
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, //[cite: 6]
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, //[cite: 6]
             children: [
-              Image.asset('assets/images/KumbaraLogo.png', height: 30),
+              Image.asset(
+                'assets/images/KumbaraLogo.png',
+                height: 35,
+              ), //[cite: 6]
               const Icon(
-                Icons.nfc_rounded,
-                color: AppColors.neonBlue,
-                size: 24,
+                Icons.nfc_rounded, //[cite: 6]
+                color: AppColors.mintTurquoise,
+                size: 26,
               ),
             ],
           ),
           const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start, //[cite: 6]
             children: [
               Text(
-                'MÜŞTERİ NO',
+                'MÜŞTERI NO', //[cite: 6]
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.white60,
                   fontSize: 10,
-                  letterSpacing: 1.5,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5, //[cite: 6]
                 ),
               ),
-              SizedBox(height: 6),
+              SizedBox(height: 6), //[cite: 6]
               Text(
-                'KMB - 7482 - 9105',
+                'KMB - 7482 - 9105', //[cite: 6]
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
+                  color: Colors.white, //[cite: 6]
+                  fontSize: 22, //[cite: 6]
+                  fontWeight: FontWeight.bold, //[cite: 6]
+                  letterSpacing: 2, //[cite: 6]
                 ),
               ),
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, //[cite: 6]
             children: [
               const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start, //[cite: 6]
                 children: [
                   Text(
-                    'KULLANICI',
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Mustafa Fildiş',
+                    'KULLANICI', //[cite: 6]
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.white60,
+                      fontSize: 10,
                       fontWeight: FontWeight.bold,
+                    ), //[cite: 6]
+                  ),
+                  SizedBox(height: 4), //[cite: 6]
+                  Text(
+                    'Mustafa Fildiş', //[cite: 6]
+                    style: TextStyle(
+                      color: Colors.white, //[cite: 6]
+                      fontWeight: FontWeight.bold, //[cite: 6]
                     ),
                   ),
                 ],
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end, //[cite: 6]
                 children: [
                   const Text(
-                    'DURUM',
-                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                    'DURUM', //[cite: 6]
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ), //[cite: 6]
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 4), //[cite: 6]
                   Text(
-                    'PREMIUM',
+                    'PREMIUM', //[cite: 6]
                     style: const TextStyle(
-                      color: AppColors.gold,
+                      color: AppColors.goldYellow,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

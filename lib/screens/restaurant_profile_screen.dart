@@ -15,12 +15,17 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.background, // Temiz beyaz zemin
       appBar: AppBar(
-        backgroundColor: AppColors.inputBackground,
+        backgroundColor: AppColors.darkNavy,
+        elevation: 0,
         title: const Text(
           'İşletme Kimliği & Profil',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(
@@ -41,18 +46,20 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
                 children: [
                   CircleAvatar(
                     radius: 54,
-                    backgroundColor: AppColors.gold.withAlpha(50),
+                    backgroundColor: AppColors.warmOrange.withValues(
+                      alpha: 0.15,
+                    ),
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundColor: AppColors.inputBackground,
+                      backgroundColor: Colors.white,
                       child: Icon(
                         _isLogoSelected
                             ? Icons.business_center_rounded
                             : Icons.storefront_rounded,
                         size: 44,
                         color: _isLogoSelected
-                            ? AppColors.gold
-                            : AppColors.neonBlue,
+                            ? AppColors.warmOrange
+                            : AppColors.darkNavy,
                       ),
                     ),
                   ),
@@ -74,10 +81,10 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
                       },
                       child: const CircleAvatar(
                         radius: 18,
-                        backgroundColor: AppColors.gold,
+                        backgroundColor: AppColors.warmOrange,
                         child: Icon(
                           Icons.camera_alt_rounded,
-                          color: AppColors.background,
+                          color: Colors.white,
                           size: 16,
                         ),
                       ),
@@ -93,7 +100,9 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
                   : 'Kurumsal Logo Değiştir',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: _isLogoSelected ? Colors.green : Colors.grey,
+                color: _isLogoSelected
+                    ? Colors.green.shade700
+                    : Colors.grey.shade600,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
@@ -104,8 +113,8 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
             const Text(
               'İŞLETME DETAYLARI',
               style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
+                color: AppColors.darkNavy,
+                fontSize: 13,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),
@@ -133,8 +142,8 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
             const Text(
               'DIREKT İLETİŞİM KANALLARI',
               style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
+                color: AppColors.darkNavy,
+                fontSize: 13,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),
@@ -144,14 +153,14 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
               title: 'WhatsApp Direkt Destek Hattı',
               subtitle: '+90 5XX XXX XX XX',
               icon: Icons.chat_rounded,
-              color: Colors.green,
+              color: Colors.green.shade600,
               actionLabel: 'Test Et',
             ),
             _buildCommunicationTile(
               title: 'Sabit Kurumsal Telefon',
               subtitle: '0342 XXX XX XX',
               icon: Icons.phone_in_talk_rounded,
-              color: AppColors.neonBlue,
+              color: AppColors.darkNavy,
               actionLabel: 'Ara',
             ),
 
@@ -161,8 +170,8 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
             const Text(
               'SOSYAL MEDYA VİTRİNİ',
               style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
+                color: AppColors.darkNavy,
+                fontSize: 13,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),
@@ -172,7 +181,7 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
               title: 'Instagram Resmi Sayfası',
               subtitle: '@ahenk_kahvedunyasii',
               icon: Icons.camera_rounded,
-              color: Colors.pinkAccent,
+              color: Colors.pink.shade600,
               actionLabel: 'Bağlan',
             ),
 
@@ -182,8 +191,8 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
             const Text(
               'LOKASYON BİLGİLERİ',
               style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
+                color: AppColors.darkNavy,
+                fontSize: 13,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),
@@ -200,9 +209,10 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
               'İşletme Bilgi Sistemi v1.0\nPowered by Ahenk Bilgisayar Yazılım ve Güvenlik',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white24,
-                fontSize: 11,
+                color: Colors.grey,
+                fontSize: 12,
                 height: 1.5,
+                fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 20),
@@ -218,12 +228,20 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.inputBackground,
-        borderRadius: BorderRadius.circular(14),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade200, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade100,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          Icon(icon, color: AppColors.gold, size: 20),
+          Icon(icon, color: AppColors.goldYellow, size: 22),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
@@ -231,15 +249,19 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
               children: [
                 Text(
                   label,
-                  style: const TextStyle(color: Colors.grey, fontSize: 11),
+                  style: TextStyle(
+                    color: Colors.grey.shade600,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   value,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppColors.darkNavy,
                     fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -261,27 +283,39 @@ class _RestaurantProfileScreenState extends State<RestaurantProfileScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: AppColors.inputBackground,
-        borderRadius: BorderRadius.circular(14),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade200, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade100,
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: ListTile(
         leading: Icon(icon, color: color, size: 22),
         title: Text(
           title,
           style: const TextStyle(
-            color: Colors.white,
+            color: AppColors.darkNavy,
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: const TextStyle(color: Colors.grey, fontSize: 12),
+          style: TextStyle(
+            color: Colors.grey.shade600,
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         trailing: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: color.withAlpha(30),
+            color: color.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(

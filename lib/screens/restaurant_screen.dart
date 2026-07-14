@@ -22,12 +22,12 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.inputBackground,
-        elevation: 2,
+        backgroundColor: AppColors.darkNavy,
+        elevation: 0,
         title: const Text(
           'Kumbara İşletme Paneli',
           style: TextStyle(
-            color: AppColors.gold,
+            color: AppColors.goldYellow,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -60,23 +60,29 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.inputBackground,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.neonBlue.withAlpha(30)),
+                  border: Border.all(color: Colors.grey.shade200, width: 1.5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade100,
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
                 ),
                 child: Row(
                   children: [
                     const CircleAvatar(
-                      backgroundColor: AppColors.gold,
+                      backgroundColor: AppColors.warmOrange,
                       radius: 24,
                       child: Icon(
                         Icons.storefront_rounded,
-                        color: AppColors.background,
+                        color: Colors.white,
                         size: 28,
                       ),
                     ),
                     const SizedBox(width: 16),
-                    // TAŞMA ÖNLEYİCİ KALKAN
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,19 +90,19 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                           const Text(
                             'Ahenk Kahve Dünyası',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.darkNavy,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 4),
-                          Text(
+                          const Text(
                             'Şahinbey / Gaziantep (Profil İçin Dokunun)',
-                            style: const TextStyle(
-                              color: AppColors.gold,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500,
+                            style: TextStyle(
+                              color: AppColors.warmOrange,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -137,14 +143,14 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 40),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [AppColors.gold, Color(0xffb89218)],
+                    colors: [AppColors.warmOrange, AppColors.hotPink],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.gold.withAlpha(50),
+                      color: AppColors.hotPink.withValues(alpha: 0.3),
                       blurRadius: 15,
                       offset: const Offset(0, 8),
                     ),
@@ -155,13 +161,13 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                     Icon(
                       Icons.qr_code_scanner_rounded,
                       size: 54,
-                      color: AppColors.background,
+                      color: Colors.white,
                     ),
                     SizedBox(height: 12),
                     Text(
-                      'MÜŞTERİ QR / KART OKUT',
+                      'MÜŞTERI QR / KART OKUT',
                       style: TextStyle(
-                        color: AppColors.background,
+                        color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1,
@@ -171,8 +177,8 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                     Text(
                       'Puan eklemek veya kampanya onaylamak için basın',
                       style: TextStyle(
-                        color: Color(0x99030e1e),
-                        fontSize: 11,
+                        color: Colors.white70,
+                        fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -189,7 +195,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                 const Text(
                   'Aktif Kampanyalarınız',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.darkNavy,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -207,19 +213,23 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   },
                   icon: const Icon(
                     Icons.add_rounded,
-                    color: AppColors.neonBlue,
+                    color: AppColors.warmOrange,
                     size: 18,
                   ),
                   label: const Text(
                     'Yeni Ekle',
-                    style: TextStyle(color: AppColors.neonBlue, fontSize: 13),
+                    style: TextStyle(
+                      color: AppColors.warmOrange,
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
 
-            // DİNAMİK KAMPANYA LİSTELEME ALANI (Sıkıştırma ve taşma hataları giderildi)
+            // DİNAMİK KAMPANYA LİSTELEME ALANI
             Column(
               children: myCampaigns.map((camp) {
                 return Padding(
@@ -227,9 +237,19 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppColors.inputBackground,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.white.withAlpha(10)),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.grey.shade200,
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade100,
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -237,7 +257,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                         Expanded(
                           child: Row(
                             children: [
-                              Icon(camp.icon, color: AppColors.gold, size: 20),
+                              Icon(
+                                camp.icon,
+                                color: AppColors.sweetPurple,
+                                size: 22,
+                              ),
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Column(
@@ -246,7 +270,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                     Text(
                                       camp.campaignTitle,
                                       style: const TextStyle(
-                                        color: Colors.white,
+                                        color: AppColors.darkNavy,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
                                       ),
@@ -256,9 +280,10 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                                     const SizedBox(height: 4),
                                     Text(
                                       camp.progressText,
-                                      style: const TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 11,
+                                      style: TextStyle(
+                                        color: Colors.grey.shade600,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 1,
@@ -269,9 +294,9 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
                             ],
                           ),
                         ),
-                        const Icon(
+                        Icon(
                           Icons.arrow_forward_ios_rounded,
-                          color: Colors.grey,
+                          color: Colors.grey.shade400,
                           size: 14,
                         ),
                       ],
@@ -291,18 +316,26 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.inputBackground,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade200, width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade100,
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: AppColors.neonBlue, size: 22),
+            Icon(icon, color: AppColors.warmOrange, size: 24),
             const SizedBox(height: 12),
             Text(
               value,
               style: const TextStyle(
-                color: Colors.white,
+                color: AppColors.darkNavy,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
@@ -310,7 +343,11 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             const SizedBox(height: 4),
             Text(
               title,
-              style: const TextStyle(color: Colors.grey, fontSize: 12),
+              style: TextStyle(
+                color: Colors.grey.shade600,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),

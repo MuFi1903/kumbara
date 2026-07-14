@@ -10,27 +10,29 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class _ScannerScreenState extends State<ScannerScreen> {
-  // Kamerayı kontrol etmek ve işimiz bitince kapatmak için kontrolcü
   final MobileScannerController _cameraController = MobileScannerController();
-  bool _isScanCompleted =
-      false; // Üst üste birden fazla taramayı engellemek için
+  bool _isScanCompleted = false;
 
   @override
   void dispose() {
-    _cameraController
-        .dispose(); // Ekrandan çıkınca kamerayı kapat, pili yemesin
+    _cameraController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Kamera arkası karanlık olsun
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: AppColors.inputBackground,
+        backgroundColor: AppColors.darkNavy,
+        elevation: 0,
         title: const Text(
           'Müşteri Kodu Tara',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(
@@ -50,27 +52,25 @@ class _ScannerScreenState extends State<ScannerScreen> {
 
               if (barcodes.isNotEmpty && !_isScanCompleted) {
                 setState(() {
-                  _isScanCompleted = true; // İlk kodu yakaladık, kilitle
+                  _isScanCompleted = true;
                 });
 
-                // Taranan QR kodun içindeki yazıyı alıyoruz
                 final String codeValue =
                     barcodes.first.rawValue ?? "Bilinmeyen Kod";
 
-                // Kamerayı durdur ve başarı diyaloğunu göster
                 _cameraController.stop();
                 _showSuccessDialog(codeValue);
               }
             },
           ),
 
-          // 2. KATMAN: HEDEFLEME ÇERÇEVESİ (UI Görsel Efekt)
+          // 2. KATMAN: HEDEFLEME ÇERÇEVESİ
           Center(
             child: Container(
               width: 240,
               height: 240,
               decoration: BoxDecoration(
-                border: Border.all(color: AppColors.gold, width: 3),
+                border: Border.all(color: AppColors.goldYellow, width: 3.5),
                 borderRadius: BorderRadius.circular(24),
               ),
             ),
@@ -82,10 +82,10 @@ class _ScannerScreenState extends State<ScannerScreen> {
             left: 20,
             right: 20,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
               decoration: BoxDecoration(
-                color: Colors.black.withAlpha(150),
-                borderRadius: BorderRadius.circular(10),
+                color: Colors.black.withValues(alpha: 0.6),
+                borderRadius: BorderRadius.circular(16),
               ),
               child: const Text(
                 'Müşterinin QR kodunu veya Dijital Kartını\nbu çerçevenin içine ortalayın',
@@ -93,6 +93,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 13,
+                  fontWeight: FontWeight.w500,
                   height: 1.5,
                 ),
               ),
@@ -107,21 +108,25 @@ class _ScannerScreenState extends State<ScannerScreen> {
   void _showSuccessDialog(String scannedData) {
     showDialog(
       context: context,
-      barrierDismissible: false, // Dışarı tıklayınca kapanmasın
+      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: AppColors.inputBackground,
+          backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(24),
           ),
-          title: const Row(
+          title: Row(
             children: [
-              Icon(Icons.check_circle_rounded, color: Colors.green, size: 28),
-              SizedBox(width: 10),
-              Text(
+              Icon(
+                Icons.check_circle_rounded,
+                color: Colors.green.shade600,
+                size: 28,
+              ),
+              const SizedBox(width: 10),
+              const Text(
                 'İŞLEM BAŞARILI',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.darkNavy,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -132,47 +137,58 @@ class _ScannerScreenState extends State<ScannerScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Müşteri Verisi Doğrulandı:',
-                style: TextStyle(color: Colors.grey, fontSize: 13),
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(12),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(8),
+                  color: AppColors.sweetPurple.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: AppColors.sweetPurple.withValues(alpha: 0.2),
+                    width: 1,
+                  ),
                 ),
                 child: Text(
                   scannedData,
                   style: const TextStyle(
-                    color: AppColors.neonBlue,
+                    color: AppColors.darkNavy,
                     fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                    fontSize: 15,
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Kumbara puanı veya kampanya ilerlemesi hesaba anında işlendi.',
-                style: TextStyle(color: Colors.white, fontSize: 13),
+                style: TextStyle(
+                  color: Colors.grey.shade700,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // Diyaloğu kapat
-                Navigator.pop(
-                  context,
-                ); // Kamera ekranından esnaf paneline geri dön
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
               child: const Text(
                 'Kapat',
                 style: TextStyle(
-                  color: AppColors.gold,
+                  color: AppColors.warmOrange,
                   fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
             ),

@@ -12,10 +12,15 @@ class RestaurantDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.inputBackground,
+        backgroundColor: AppColors.darkNavy,
+        elevation: 0,
         title: Text(
           restaurant.name,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(
@@ -34,56 +39,64 @@ class RestaurantDetailScreen extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: AppColors.gold.withAlpha(40),
+                  backgroundColor: AppColors.warmOrange.withValues(alpha: 0.1),
                   radius: 30,
-                  child: Icon(restaurant.icon, color: AppColors.gold, size: 32),
+                  child: Icon(
+                    restaurant.icon,
+                    color: AppColors.warmOrange,
+                    size: 32,
+                  ),
                 ),
                 const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      restaurant.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        restaurant.name,
+                        style: const TextStyle(
+                          color: AppColors.darkNavy,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on_rounded,
-                          color: Colors.grey,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${restaurant.district} • ${restaurant.distance}',
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 13,
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_rounded,
+                            color: Colors.grey.shade500,
+                            size: 14,
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        const Icon(
-                          Icons.star_rounded,
-                          color: AppColors.gold,
-                          size: 14,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${restaurant.rating}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
+                          const SizedBox(width: 4),
+                          Text(
+                            '${restaurant.district} • ${restaurant.distance}',
+                            style: TextStyle(
+                              color: Colors.grey.shade600,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          const SizedBox(width: 12),
+                          const Icon(
+                            Icons.star_rounded,
+                            color: AppColors.goldYellow,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            '${restaurant.rating}',
+                            style: const TextStyle(
+                              color: AppColors.darkNavy,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -93,21 +106,25 @@ class RestaurantDetailScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.green.withAlpha(25),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.green.withAlpha(70)),
+                color: Colors.green.shade50,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.green.shade200),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.gavel_rounded, color: Colors.green, size: 18),
-                  SizedBox(width: 10),
+                  Icon(
+                    Icons.gavel_rounded,
+                    color: Colors.green.shade700,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       'Mevzuata Uygun Dijital Menü: Kalori, içerik ve alerjen bilgileri bakanlık yönetmeliğine göre doğrulanmıştır.',
                       style: TextStyle(
-                        color: Colors.green,
+                        color: Colors.green.shade800,
                         fontSize: 11,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -119,7 +136,7 @@ class RestaurantDetailScreen extends StatelessWidget {
             const Text(
               'DİJİTAL MENÜ',
               style: TextStyle(
-                color: AppColors.gold,
+                color: AppColors.darkNavy,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
                 fontSize: 14,
@@ -134,9 +151,16 @@ class RestaurantDetailScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 16),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: AppColors.inputBackground,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.white.withAlpha(10)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.grey.shade200, width: 1.5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade100,
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +171,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                           Text(
                             item.name,
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: AppColors.darkNavy,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -155,35 +179,35 @@ class RestaurantDetailScreen extends StatelessWidget {
                           Text(
                             item.price,
                             style: const TextStyle(
-                              color: AppColors.neonBlue,
+                              color: AppColors.warmOrange,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 8),
 
                       // Kalori Etiketi
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
+                          horizontal: 8,
+                          vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white.withAlpha(15),
-                          borderRadius: BorderRadius.circular(4),
+                          color: AppColors.sweetPurple.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           item.calories,
                           style: const TextStyle(
-                            color: AppColors.gold,
+                            color: AppColors.sweetPurple,
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      const Divider(color: Colors.white10, height: 20),
+                      const Divider(color: Colors.black12, height: 24),
 
                       // İçerik ve Alerjen Alanları (Yeni Kanun Çözümü)
                       Row(
@@ -192,7 +216,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                           const Text(
                             'İçerik: ',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: AppColors.darkNavy,
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
@@ -200,9 +224,10 @@ class RestaurantDetailScreen extends StatelessWidget {
                           Expanded(
                             child: Text(
                               item.ingredients,
-                              style: const TextStyle(
-                                color: Colors.grey,
+                              style: TextStyle(
+                                color: Colors.grey.shade700,
                                 fontSize: 12,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -226,6 +251,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                               style: const TextStyle(
                                 color: Colors.redAccent,
                                 fontSize: 12,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),

@@ -12,11 +12,10 @@ class CreateCampaignScreen extends StatefulWidget {
 class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
-  final TextEditingController _pointsController =
-      TextEditingController(); // Puan kontrolcüsü
+  final TextEditingController _pointsController = TextEditingController();
 
   String _selectedCategory = 'Kahve';
-  bool _isImageSelected = false; // Görsel seçildi mi kontrolü
+  bool _isImageSelected = false;
 
   final List<Map<String, dynamic>> _categories = [
     {'name': 'Kahve', 'icon': Icons.coffee_rounded},
@@ -38,10 +37,15 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.inputBackground,
+        backgroundColor: AppColors.darkNavy,
+        elevation: 0,
         title: const Text(
           'Gelişmiş Kampanya Sihirbazı',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(Icons.close_rounded, color: Colors.white),
@@ -55,7 +59,11 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
           children: [
             const Text(
               'Kampanya Kategorisi',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
+              style: TextStyle(
+                color: AppColors.darkNavy,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 12),
 
@@ -73,26 +81,32 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppColors.gold
-                            : AppColors.inputBackground,
-                        borderRadius: BorderRadius.circular(12),
+                            ? AppColors.warmOrange
+                            : Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: isSelected
+                              ? AppColors.warmOrange
+                              : Colors.grey.shade300,
+                          width: 1,
+                        ),
                       ),
                       child: Column(
                         children: [
                           Icon(
                             cat['icon'],
                             color: isSelected
-                                ? AppColors.background
-                                : AppColors.neonBlue,
-                            size: 22,
+                                ? Colors.white
+                                : AppColors.darkNavy,
+                            size: 24,
                           ),
                           const SizedBox(height: 6),
                           Text(
                             cat['name'],
                             style: TextStyle(
                               color: isSelected
-                                  ? AppColors.background
-                                  : Colors.white,
+                                  ? Colors.white
+                                  : AppColors.darkNavy,
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                             ),
@@ -106,16 +120,20 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
             ),
             const SizedBox(height: 24),
 
-            // YENİ: ÜRÜN / MENÜ GÖRSELİ EKLEME ALANI (PREMIUM METALLIC LOOK)
+            // ÜRÜN / MENÜ GÖRSELİ EKLEME ALANI
             const Text(
               'Ürün / Menü Fotoğrafı',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
+              style: TextStyle(
+                color: AppColors.darkNavy,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             GestureDetector(
               onTap: () {
                 setState(() {
-                  _isImageSelected = true; // Simüle olarak görsel seçildi
+                  _isImageSelected = true;
                 });
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -129,12 +147,12 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 decoration: BoxDecoration(
-                  color: AppColors.inputBackground,
-                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: _isImageSelected
-                        ? AppColors.gold
-                        : Colors.white.withAlpha(15),
+                        ? AppColors.warmOrange
+                        : Colors.grey.shade300,
                     width: 1.5,
                   ),
                 ),
@@ -145,8 +163,8 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                           ? Icons.check_circle_rounded
                           : Icons.add_photo_alternate_rounded,
                       color: _isImageSelected
-                          ? AppColors.gold
-                          : AppColors.neonBlue,
+                          ? AppColors.warmOrange
+                          : AppColors.mintTurquoise,
                       size: 36,
                     ),
                     const SizedBox(height: 8),
@@ -155,7 +173,9 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                           ? 'Görsel Başarıyla Eklendi (urun_menu.jpg)'
                           : 'Kampanyalı Ürün Görseli Seç',
                       style: TextStyle(
-                        color: _isImageSelected ? Colors.white : Colors.grey,
+                        color: _isImageSelected
+                            ? AppColors.darkNavy
+                            : Colors.grey.shade600,
                         fontSize: 13,
                         fontWeight: _isImageSelected
                             ? FontWeight.bold
@@ -171,60 +191,91 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
             // KAMPANYA BAŞLIĞI
             const Text(
               'Kampanya Başlığı',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
+              style: TextStyle(
+                color: AppColors.darkNavy,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             TextField(
               controller: _titleController,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(
+                color: AppColors.darkNavy,
+                fontWeight: FontWeight.bold,
+              ),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: AppColors.inputBackground,
+                fillColor: Colors.white,
                 hintText: 'Örn: Filtre Kahve Yanına Mozaik Pasta!',
-                hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+                hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: AppColors.warmOrange,
+                    width: 2,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                    width: 1.5,
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 24),
 
-            // YENİ: KAZANDIRILACAK PUAN / TL DEĞERİ INPUTU
+            // KAZANDIRILACAK PUAN / TL DEĞERİ INPUTU
             const Text(
               'Müşteriye Tanımlanacak Puan Değeri (TL)',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
+              style: TextStyle(
+                color: AppColors.darkNavy,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             TextField(
               controller: _pointsController,
-              keyboardType:
-                  TextInputType.number, // Sadece rakam klavyesi açılsın
+              keyboardType: TextInputType.number,
               style: const TextStyle(
-                color: AppColors.gold,
+                color: AppColors.goldYellow,
                 fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: AppColors.inputBackground,
+                fillColor: Colors.white,
                 hintText: 'Örn: 20',
-                hintStyle: const TextStyle(
-                  color: Colors.grey,
+                hintStyle: TextStyle(
+                  color: Colors.grey.shade500,
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
                 ),
                 prefixIcon: const Icon(
                   Icons.stars_rounded,
-                  color: AppColors.gold,
+                  color: AppColors.goldYellow,
                 ),
                 suffixText: 'TL Puan',
-                suffixStyle: const TextStyle(
-                  color: Colors.grey,
+                suffixStyle: TextStyle(
+                  color: Colors.grey.shade600,
                   fontWeight: FontWeight.bold,
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: AppColors.warmOrange,
+                    width: 2,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                    width: 1.5,
+                  ),
                 ),
               ),
             ),
@@ -233,22 +284,39 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
             // KAMPANYA KOŞULLARI
             const Text(
               'Kampanya Koşulları / Açıklaması',
-              style: TextStyle(color: Colors.grey, fontSize: 14),
+              style: TextStyle(
+                color: AppColors.darkNavy,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             TextField(
               controller: _descController,
               maxLines: 2,
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(
+                color: AppColors.darkNavy,
+                fontWeight: FontWeight.bold,
+              ),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: AppColors.inputBackground,
+                fillColor: Colors.white,
                 hintText:
                     'Örn: Bu kampanya sadece Ahenk Kahve Şahinbey şubesinde geçerlidir.',
-                hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
+                hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: AppColors.warmOrange,
+                    width: 2,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide(
+                    color: Colors.grey.shade300,
+                    width: 1.5,
+                  ),
                 ),
               ),
             ),
@@ -269,7 +337,6 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                   return;
                 }
 
-                // Havuza yeni genişletilmiş veriyi ekliyoruz
                 globalCampaigns.add(
                   Campaign(
                     restaurantName: 'Ahenk Kahve Dünyası',
@@ -286,8 +353,7 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                         : _selectedCategory == 'Tatlı'
                         ? Icons.cake_rounded
                         : Icons.local_bar_rounded,
-                    points:
-                        '+${_pointsController.text} TL Puan', // Puan metnini birleştirdik
+                    points: '+${_pointsController.text} TL Puan',
                   ),
                 );
 
@@ -301,20 +367,18 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.neonBlue,
+                backgroundColor: AppColors.hotPink,
+                foregroundColor: Colors.white,
+                elevation: 3,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
               child: const Center(
                 child: Text(
                   'Kampanyayı Oluştur ve Yayına Al',
-                  style: TextStyle(
-                    color: AppColors.background,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

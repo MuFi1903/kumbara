@@ -14,7 +14,10 @@ class KumbaraApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Kumbara',
-      theme: ThemeData(scaffoldBackgroundColor: AppColors.background),
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.background,
+        useMaterial3: true,
+      ),
       home: const SplashScreen(),
     );
   }
@@ -45,17 +48,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Burada 'const' kelimesini kaldırdık
+      backgroundColor: AppColors.background,
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(32.0), // Burası sabit kalabilir
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/images/KumbaraLogo.png', fit: BoxFit.contain),
               const SizedBox(height: 30),
               const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.neonBlue),
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.warmOrange),
               ),
             ],
           ),
